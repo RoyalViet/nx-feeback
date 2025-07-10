@@ -25,7 +25,7 @@ class FeedbackStorage {
         email: submission.email,
         message: submission.message,
         submittedAt: new Date(),
-        isAnonymous: submission.name.toLowerCase() === 'anonymous',
+        isAnonymous: !submission.name || submission.name.toLowerCase() === 'anonymous',
         status: 'pending',
         priority: 'medium',
         category: 'General',
@@ -460,13 +460,10 @@ class FeedbackStorage {
   }
 }
 
-// Singleton instance for consistent data across the app
 const feedbackStorage = new FeedbackStorage();
 
-// Seed sample data for demo
 feedbackStorage.seedSampleData();
 
-// Export service methods
 export const feedbackService = {
   submitFeedback: (submission: FeedbackSubmission) => feedbackStorage.submitFeedback(submission),
 

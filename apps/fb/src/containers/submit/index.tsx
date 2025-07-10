@@ -43,51 +43,41 @@ export function FeedbackForm() {
 
   const submitFeedback = useSubmitFeedback();
 
-  // Handle input changes with real-time validation
   const handleChange = (field: keyof FeedbackSubmission, value: string) => {
     const sanitizedValue = sanitizeInput(value);
     setValues(prev => ({ ...prev, [field]: sanitizedValue }));
 
-    // Validate field if it has been touched
     if (touched[field]) {
       const newErrors = validateFeedbackForm({ ...values, [field]: sanitizedValue });
       setErrors(prev => ({ ...prev, [field]: newErrors[field] }));
     }
   };
 
-  // Handle field blur for validation
   const handleBlur = (field: keyof FeedbackSubmission) => {
     setTouched(prev => ({ ...prev, [field]: true }));
     const newErrors = validateFeedbackForm(values);
     setErrors(prev => ({ ...prev, [field]: newErrors[field] }));
   };
 
-  // Handle form submission
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Mark all fields as touched
     setTouched({ name: true, email: true, message: true });
 
-    // Validate entire form
     const validationErrors = validateFeedbackForm(values);
     setErrors(validationErrors);
 
-    // Check if form is valid
     if (hasValidationErrors(validationErrors)) {
       return;
     }
 
-    // Submit feedback
     try {
       await submitFeedback.submit(values);
 
-      // Reset form on success
       setValues(INITIAL_VALUES);
       setErrors(INITIAL_ERRORS);
       setTouched({ name: false, email: false, message: false });
     } catch (error) {
-      // Error handling is done in the mutation hook
       console.error('Form submission error:', error);
     }
   };
@@ -109,7 +99,6 @@ export function FeedbackForm() {
 
       <CardContent>
         <form onSubmit={handleSubmit} className="space-y-6">
-          {/* Name Field */}
           <div className="space-y-2">
             <Label htmlFor="name" className="flex items-center gap-2 text-sm font-medium">
               <User className="h-4 w-4" />
@@ -133,7 +122,6 @@ export function FeedbackForm() {
             )}
           </div>
 
-          {/* Email Field */}
           <div className="space-y-2">
             <Label htmlFor="email" className="flex items-center gap-2 text-sm font-medium">
               <Mail className="h-4 w-4" />
@@ -157,7 +145,6 @@ export function FeedbackForm() {
             )}
           </div>
 
-          {/* Message Field */}
           <div className="space-y-2">
             <div className="flex items-center justify-between">
               <Label htmlFor="message" className="flex items-center gap-2 text-sm font-medium">
@@ -193,7 +180,6 @@ export function FeedbackForm() {
             )}
           </div>
 
-          {/* Submit Button */}
           <Button
             type="submit"
             size="lg"

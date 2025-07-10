@@ -122,7 +122,6 @@ export function FeedbackDetailDialog({
         </DialogHeader>
 
         <div className="space-y-6">
-          {/* Feedback Header */}
           <Card>
             <CardHeader>
               <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
@@ -161,7 +160,6 @@ export function FeedbackDetailDialog({
             </CardHeader>
           </Card>
 
-          {/* Tags and Category */}
           <Card>
             <CardContent className="pt-6">
               <div className="space-y-3">
@@ -182,7 +180,6 @@ export function FeedbackDetailDialog({
             </CardContent>
           </Card>
 
-          {/* Feedback Message */}
           <Card>
             <CardHeader>
               <CardTitle className="text-base">Feedback Message</CardTitle>
@@ -196,8 +193,7 @@ export function FeedbackDetailDialog({
             </CardContent>
           </Card>
 
-          {/* Engagement and Actions */}
-          <Card>
+          {/* <Card>
             <CardContent className="pt-6">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-6">
@@ -227,9 +223,8 @@ export function FeedbackDetailDialog({
                 </div>
               </div>
             </CardContent>
-          </Card>
+          </Card> */}
 
-          {/* Existing Reply */}
           {feedback.reply && (
             <Card>
               <CardHeader>
@@ -260,7 +255,6 @@ export function FeedbackDetailDialog({
             </Card>
           )}
 
-          {/* Reply Form */}
           {(isEditing || !feedback.reply) && (
             <Card>
               <CardHeader>

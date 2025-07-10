@@ -22,17 +22,17 @@ export const VALIDATION_RULES = {
 // Individual field validators
 export const validators = {
   name: (value: string): string | undefined => {
-    if (!value || value.trim().length === 0) {
-      return 'Name is required';
-    }
+    // if (!value || value.trim().length === 0) {
+    //   return 'Name is required';
+    // }
 
-    if (value.trim().length < VALIDATION_RULES.NAME.MIN_LENGTH) {
-      return `Name must be at least ${VALIDATION_RULES.NAME.MIN_LENGTH} characters`;
-    }
+    // if (value.trim().length < VALIDATION_RULES.NAME.MIN_LENGTH) {
+    //   return `Name must be at least ${VALIDATION_RULES.NAME.MIN_LENGTH} characters`;
+    // }
 
-    if (value.length > VALIDATION_RULES.NAME.MAX_LENGTH) {
-      return `Name must not exceed ${VALIDATION_RULES.NAME.MAX_LENGTH} characters`;
-    }
+    // if (value.length > VALIDATION_RULES.NAME.MAX_LENGTH) {
+    //   return `Name must not exceed ${VALIDATION_RULES.NAME.MAX_LENGTH} characters`;
+    // }
 
     return undefined;
   },

@@ -1,6 +1,6 @@
 // Professional feedback listing component with pagination
 
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { ChevronLeft, ChevronRight, MessageSquare, Search, SortAsc } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
@@ -17,14 +17,33 @@ import { PAGE_SIZE_OPTIONS } from '@/constants/common.constant';
 import { useAppDispatch, useAppSelector } from '@/hooks/useRedux';
 import { Feedback, FeedbackFilters } from '@/models/stores/feedback.model';
 import { getFeedbackActions } from '@/stores/feedback/feedback.action';
+import { toastSuccess } from '@/utils/toast.util';
 
 import { FeedbackCard } from './FeedbackCard';
 import { FeedbackDetailDialog } from './FeedbackDetailDialog';
 import { FeedbackListSkeleton } from './FeedbackListSkeleton';
 
+// Custom hook for debouncing
+function useDebounce<T>(value: T, delay: number): T {
+  const [debouncedValue, setDebouncedValue] = useState<T>(value);
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedValue(value);
+    }, delay);
+
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [value, delay]);
+
+  return debouncedValue;
+}
+
 export function FeedbackList() {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
+  const [searchInput, setSearchInput] = useState('');
   const [filters, setFilters] = useState<FeedbackFilters>({
     search: '',
     sortBy: 'newest',
@@ -37,6 +56,12 @@ export function FeedbackList() {
 
   const dispatch = useAppDispatch();
 
+  const debouncedSearch = useDebounce(searchInput, 300);
+  useEffect(() => {
+    setFilters(prev => ({ ...prev, search: debouncedSearch }));
+    setCurrentPage(1);
+  }, [debouncedSearch]);
+
   useEffect(() => {
     dispatch(
       getFeedbackActions.request({
@@ -48,10 +73,8 @@ export function FeedbackList() {
     );
   }, [currentPage, pageSize, filters, dispatch]);
 
-  // Handle search with debouncing
   const handleSearchChange = (value: string) => {
-    setFilters(prev => ({ ...prev, search: value }));
-    setCurrentPage(1); // Reset to first page when searching
+    setSearchInput(value);
   };
 
   // Handle sort change
@@ -60,35 +83,31 @@ export function FeedbackList() {
     setCurrentPage(1);
   };
 
-  // Handle page size change
   const handlePageSizeChange = (newPageSize: string) => {
     setPageSize(parseInt(newPageSize));
     setCurrentPage(1);
   };
 
-  // Handle pagination
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  // Handle feedback click
   const handleFeedbackClick = (feedback: Feedback) => {
     setSelectedFeedback(feedback);
     setDialogOpen(true);
   };
 
-  // Handle reply
   const handleReply = (feedbackId: string, reply: string, isDraft: boolean) => {
     // TODO: Implement reply logic with API
+    toastSuccess('Pending for approval');
   };
 
-  // Handle voting
   const handleVote = (feedbackId: string, type: 'up' | 'down') => {
     // TODO: Implement voting logic with API
+    toastSuccess('Pending for approval');
   };
 
-  // Generate pagination buttons
   const generatePaginationButtons = () => {
     if (!totalPage) return [];
 
@@ -98,7 +117,6 @@ export function FeedbackList() {
     let start = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
     const end = Math.min(totalPage, start + maxVisiblePages - 1);
 
-    // Adjust start if we're near the end
     if (end - start + 1 < maxVisiblePages) {
       start = Math.max(1, end - maxVisiblePages + 1);
     }
@@ -112,7 +130,6 @@ export function FeedbackList() {
 
   return (
     <div className="mx-auto w-full max-w-4xl space-y-6">
-      {/* Header with Controls */}
       <Card>
         <CardHeader>
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
@@ -124,20 +141,17 @@ export function FeedbackList() {
               <CardDescription>{totalItem || 0} feedback submissions</CardDescription>
             </div>
 
-            {/* Controls */}
             <div className="flex flex-col gap-3 sm:flex-row">
-              {/* Search */}
               <div className="relative">
                 <Search className="text-muted-foreground absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 transform" />
                 <Input
                   placeholder="Search feedback..."
-                  value={filters.search || ''}
+                  value={searchInput || ''}
                   onChange={e => handleSearchChange(e.target.value)}
                   className="w-full pl-10 sm:w-64"
                 />
               </div>
 
-              {/* Sort */}
               <Select value={filters.sortBy} onValueChange={handleSortChange}>
                 <SelectTrigger className="w-full sm:w-40">
                   <SortAsc className="mr-2 h-4 w-4" />
@@ -149,7 +163,6 @@ export function FeedbackList() {
                 </SelectContent>
               </Select>
 
-              {/* Page Size */}
               <Select value={pageSize.toString()} onValueChange={handlePageSizeChange}>
                 <SelectTrigger className="w-full sm:w-24">
                   <SelectValue />
@@ -167,7 +180,6 @@ export function FeedbackList() {
         </CardHeader>
       </Card>
 
-      {/* Feedback List */}
       {isLoading ? (
         <FeedbackListSkeleton count={pageSize} />
       ) : (
@@ -192,18 +204,15 @@ export function FeedbackList() {
         </div>
       )}
 
-      {/* Pagination */}
       {totalPage && totalPage > 1 ? (
         <Card>
           <CardContent className="py-4">
             <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
-              {/* Pagination Info */}
               <div className="text-muted-foreground text-sm">
                 Showing {(currentPage - 1) * pageSize + 1} to{' '}
                 {Math.min(currentPage * pageSize, totalItem)} of {totalItem} results
               </div>
 
-              {/* Pagination Controls */}
               <div className="flex items-center gap-2">
                 <Button
                   variant="outline"
@@ -244,7 +253,6 @@ export function FeedbackList() {
         </Card>
       ) : null}
 
-      {/* Feedback Detail Dialog */}
       <FeedbackDetailDialog
         feedback={selectedFeedback}
         open={dialogOpen}
