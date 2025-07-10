@@ -1,6 +1,6 @@
 // Professional feedback listing component with pagination
 
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ChevronLeft, ChevronRight, MessageSquare, Search, SortAsc } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';

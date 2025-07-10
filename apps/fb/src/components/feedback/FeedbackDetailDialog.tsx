@@ -82,10 +82,10 @@ export function FeedbackDetailDialog({
 
   const getSentimentColor = () => {
     switch (feedback.sentiment) {
-      case 'positive':
-        return 'text-green-600';
-      case 'negative':
-        return 'text-red-600';
+      // case 'positive':
+      //   return 'text-green-600';
+      // case 'negative':
+      //   return 'text-red-600';
       default:
         return 'text-muted-foreground';
     }
@@ -160,7 +160,7 @@ export function FeedbackDetailDialog({
             </CardHeader>
           </Card>
 
-          <Card>
+          {/* <Card>
             <CardContent className="pt-6">
               <div className="space-y-3">
                 <div className="flex items-center gap-2">
@@ -178,7 +178,7 @@ export function FeedbackDetailDialog({
                 </div>
               </div>
             </CardContent>
-          </Card>
+          </Card> */}
 
           <Card>
             <CardHeader>

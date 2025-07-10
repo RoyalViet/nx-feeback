@@ -19,7 +19,7 @@ cd <YOUR_PROJECT_NAME>
 yarn
 
 # Step 4: Start the development server with auto-reloading and an instant preview.
-yarn dev
+yarn dev:fb --verbose
 ```
 
 ## What technologies are used for this project?

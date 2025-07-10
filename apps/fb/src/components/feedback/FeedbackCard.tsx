@@ -48,10 +48,10 @@ export function FeedbackCard({ feedback, onClick }: FeedbackCardProps) {
 
   const getSentimentColor = () => {
     switch (feedback.sentiment) {
-      case 'positive':
-        return 'text-green-600';
-      case 'negative':
-        return 'text-red-600';
+      // case 'positive':
+      //   return 'text-green-600';
+      // case 'negative':
+      //   return 'text-red-600';
       default:
         return 'text-muted-foreground';
     }
@@ -86,7 +86,7 @@ export function FeedbackCard({ feedback, onClick }: FeedbackCardProps) {
                 </Badge>
               )}
               {getStatusBadge()}
-              {getPriorityBadge()}
+              {/* {getPriorityBadge()} */}
               <div className="text-muted-foreground flex items-center gap-1 text-sm">
                 <Clock className="h-3 w-3" />
                 <span>{timeAgo}</span>
@@ -95,7 +95,7 @@ export function FeedbackCard({ feedback, onClick }: FeedbackCardProps) {
           </div>
 
           {/* Tags and Category */}
-          <div className="flex items-center gap-2 pl-11 text-xs">
+          {/* <div className="flex items-center gap-2 pl-11 text-xs">
             <Tag className="text-muted-foreground h-3 w-3" />
             <span className="text-muted-foreground">{feedback.category}</span>
             {feedback.tags.slice(0, 3).map(tag => (
@@ -103,7 +103,7 @@ export function FeedbackCard({ feedback, onClick }: FeedbackCardProps) {
                 {tag}
               </Badge>
             ))}
-          </div>
+          </div> */}
 
           {/* Summary Message */}
           <div className="pl-11">
