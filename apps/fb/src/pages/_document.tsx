@@ -14,7 +14,7 @@ export default class CustomDocument extends Document {
             href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap"
             rel="stylesheet"
           />
-          <link rel="icon" type="image/x-icon" href={`${BASE_PATH}/favicon.ico`} />
+          <link rel="icon" type="image/x-icon" href={`${BASE_PATH}/favicon.png`} />
         </Head>
         <body>
           <Main />

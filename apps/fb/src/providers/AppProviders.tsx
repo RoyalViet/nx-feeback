@@ -34,20 +34,20 @@ export const CommonProviders = ({
           const { closeToast, ...svgProps } = props;
           return (
             <button type="button" onClick={closeToast}>
-              <CloseLineIcon {...svgProps} className="text-gray-400" width={20} height={20} />
+              <CloseLineIcon {...svgProps} className="text-gray" width={20} height={20} />
             </button>
           );
         }}
         icon={({ type }) => {
           if (type === 'success')
-            return <SelectBoxCircleFillIcon className="text-success-500" width={20} height={20} />;
+            return <SelectBoxCircleFillIcon className="text-success" width={20} height={20} />;
           if (type === 'error')
-            return <ErrorWarningFillIcon className="text-error-500" width={20} height={20} />;
+            return <ErrorWarningFillIcon className="text-error" width={20} height={20} />;
           if (type === 'warning')
-            return <AlertFillIcon className="text-warning-500" width={20} height={20} />;
+            return <AlertFillIcon className="text-warning" width={20} height={20} />;
           if (type === 'info')
-            return <InformationFillIcon className="text-brand-500" width={20} height={20} />;
-          else return <InformationFillIcon className="text-brand-500" width={20} height={20} />;
+            return <InformationFillIcon className="text-info" width={20} height={20} />;
+          else return <InformationFillIcon className="text-info" width={20} height={20} />;
         }}
       />
     </>
