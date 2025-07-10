@@ -1,0 +1,65 @@
+{
+  "name": "fb",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/fb",
+  "projectType": "application",
+  "tags": [],
+  "// targets": "to see all targets run: nx show project fb --web",
+  "targets": {
+    "build": {
+      "options": {
+        "command": "next build"
+      },
+      "defaultConfiguration": "development",
+      "configurations": {
+        "development": {
+          "env": {
+            "NEXT_PUBLIC_APP_STAGE": "development"
+          }
+        },
+        "staging": {
+          "env": {
+            "NEXT_PUBLIC_APP_STAGE": "staging"
+          }
+        },
+        "production": {
+          "env": {
+            "NEXT_PUBLIC_APP_STAGE": "production"
+          },
+          "optimization": true,
+          "extractLicenses": true,
+          "inspect": false
+        }
+      }
+    },
+    "dev": {
+      "options": {
+        "command": "next dev",
+        "port": 4204
+      },
+      "defaultConfiguration": "development",
+      "configurations": {
+        "development": {
+          "env": {
+            "NEXT_PUBLIC_APP_STAGE": "development"
+          }
+        },
+        "staging": {
+          "env": {
+            "NEXT_PUBLIC_APP_STAGE": "staging"
+          }
+        },
+        "production": {
+          "env": {
+            "NEXT_PUBLIC_APP_STAGE": "production"
+          }
+        }
+      }
+    },
+    "start": {
+      "options": {
+        "port": 4204
+      }
+    }
+  }
+}

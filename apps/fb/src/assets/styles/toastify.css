@@ -1,0 +1,34 @@
+.Toastify__toast {
+  border-radius: 8px;
+  font-size: 14px;
+  min-height: 35px;
+  font-family: Noto Sans JP;
+  cursor: default;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 8px 10px;
+}
+
+.Toastify__toast.has-description {
+  padding: 14px;
+  padding-bottom: 16px;
+}
+
+.Toastify__close-button {
+  color: 'var(--gray-500)';
+  position: static;
+  width: 20px;
+  height: 20px;
+}
+
+.Toastify__close-button > svg {
+  width: 20px;
+  height: 20px;
+}
+
+.Toastify__toast-icon {
+  margin-inline-end: 0;
+  width: 20px;
+}

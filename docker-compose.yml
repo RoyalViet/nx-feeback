@@ -1,0 +1,11 @@
+version: '3.8'
+services:
+  fb:
+    build:
+      context: .
+      dockerfile: apps/fb/Dockerfile.staging
+    ports:
+      - '4204:4204'
+    environment:
+      - NODE_ENV=production
+      - PORT=4204
