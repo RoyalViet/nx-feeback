@@ -3,6 +3,8 @@ import { MessageSquare, TrendingUp } from 'lucide-react';
 
 import { useAppSelector } from '@/hooks/useRedux';
 
+import { Navigation } from './Navigation';
+
 export const HEADER_ID = 'header-id';
 const Header = () => {
   const totalItem = useAppSelector(store => store.feedback.feedbackList.totalItem);
@@ -34,6 +36,7 @@ const Header = () => {
           </div>
         </div>
       </div>
+      <Navigation />
     </header>
   );
 };

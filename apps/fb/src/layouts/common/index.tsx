@@ -7,7 +7,6 @@ import { LayoutProps } from '@/models/common';
 
 import Footer from './Footer';
 import Header from './Header';
-import { Navigation } from './Navigation';
 
 const CommonLayout: React.FC<LayoutProps> = ({ children }) => {
   const { isDesktop } = useWindowSize();
@@ -15,7 +14,6 @@ const CommonLayout: React.FC<LayoutProps> = ({ children }) => {
   return (
     <div className="min-h-dvh w-full">
       <Header />
-      <Navigation />
 
       <div
         style={{

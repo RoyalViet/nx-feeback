@@ -29,7 +29,7 @@ export function useSubmitFeedback() {
         title: 'Error',
         description: 'Network error. Please check your connection and try again.',
       });
-      throw error;
+      // throw error;
     } finally {
       setIsPending(false);
     }

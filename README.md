@@ -26,7 +26,7 @@ yarn dev:fb --verbose
 
 This project is built with:
 
-- Vite
+- Nx
 - TypeScript
 - React
 - shadcn-ui

@@ -71,15 +71,11 @@ export function FeedbackForm() {
       return;
     }
 
-    try {
-      await submitFeedback.submit(values);
+    await submitFeedback.submit(values);
 
-      setValues(INITIAL_VALUES);
-      setErrors(INITIAL_ERRORS);
-      setTouched({ name: false, email: false, message: false });
-    } catch (error) {
-      console.error('Form submission error:', error);
-    }
+    setValues(INITIAL_VALUES);
+    setErrors(INITIAL_ERRORS);
+    setTouched({ name: false, email: false, message: false });
   };
 
   const messageCharCount = values.message.length;

@@ -15,7 +15,7 @@ const getTotalHeight = (element: HTMLElement): number => {
 
 export const useLayoutHeights = (): LayoutHeights => {
   const [heights, setHeights] = useState<LayoutHeights>({
-    footerHeight: 56,
+    footerHeight: 0,
     headerHeight: 56,
     totalHeight: 112,
   });
